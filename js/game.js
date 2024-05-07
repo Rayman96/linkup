@@ -5,6 +5,7 @@ var Game = (function () {
 
   var data = {
     time: config.time,
+    score: localStorage.getItem('score'),
     cell: []
   }
 
@@ -18,6 +19,7 @@ var Game = (function () {
     setup: function () {
       this.view = new View()
       this.init()
+      this.score = document.getElementById('score')
     },
 
     init: function () {
@@ -296,20 +298,27 @@ var Game = (function () {
 
     winning: function () {
       $('.sentence')[0].classList.add('show')
+      
+      data.score++
+      // score使用localstorage存储
+      localStorage.setItem('score', data.score)
+      this.view.updateScore(data.score)
       setTimeout(function () {
-        var str = '已完成，确定再来一局吗？'
+        var str = 'You Win! 1 More Cucumber!'
         alert(str)
         location.reload()
       }, 50)
     },
 
     over: function () {
-      $('.sentence')[0].classList.add('show')
+      // $('.sentence')[0].classList.add('show')
+
       setTimeout(() => {
         data.time = config.time
-        var str = '失败！确定再来一局吗？'
+        var str = 'You Lose! No Cucumber!'
         alert(str)
         location.reload()
+
       }, 50)
     },
 

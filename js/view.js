@@ -2,6 +2,7 @@ var View = (function () {
   var container = $('.container')[0]
   var gridContainer = $('.grid-container')[0]
   var timeDom = $('.time')[0]
+  var scoreDom = $('.score')[0]
 
   var game = null
 
@@ -11,11 +12,16 @@ var View = (function () {
     init: function (g, data) {
       game = g
       this.updateTime(data.time)
+      this.updateScore(data.score)
       this.initGrid(data.cell)
     },
 
     updateTime: function (time) {
       timeDom.innerHTML = time
+    },
+
+    updateScore: function (score) {
+      scoreDom.innerHTML = score
     },
 
     itemHTML: function (el) {
